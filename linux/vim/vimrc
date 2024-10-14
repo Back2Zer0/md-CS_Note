@@ -1,0 +1,135 @@
+let mapleader = ","
+let g:mapleader = ","
+let maplocalleader = ","
+"NerdTree
+nnoremap <leader>n :NERDTreeFocus<CR>
+nnoremap <leader>m :NERDTree<CR>
+nnoremap <leader>t :NERDTreeToggle<CR>
+nnoremap <leader>f :NERDTreeFind<CR>
+
+
+"快捷键修改"
+
+set tabstop=4 "tab键位数"
+set shiftwidth=4 "自动缩进位数"
+set number
+imap jk <ESC>
+nmap <space> :
+"vim-Plug 下载"
+call plug#begin('~/.vim/plugged')
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'scrooloose/nerdtree'
+Plug 'luochen1990/rainbow'
+Plug 'scrooloose/nerdcommenter'
+Plug 'altercation/vim-colors-solarized'
+Plug 'jiangmiao/auto-pairs'
+Plug 'Valloric/YouCompleteMe'
+call plug#end()
+
+"配置"
+
+"vim-airline"
+
+set laststatus=2  "永远显示状态栏"
+let g:airline_powerline_fonts = 1  " 支持 powerline 字体"
+let g:airline#extensions#tabline#enabled = 1 "显示窗口tab和buffer"
+let g:airline_theme='bubblegum'  
+
+
+if !exists('g:airline_symbols')
+	let g:airline_symbols = {}
+endif
+let g:airline_left_sep = '▶'
+let g:airline_left_alt_sep = '❯'
+let g:airline_right_sep = '◀'
+let g:airline_right_alt_sep = '❮'
+let g:airline_symbols.linenr = '¶'
+let g:airline_symbols.branch = '⎇'
+
+"Vim 在与屏幕/键盘交互时使用的编码(取决于实际的终端的设定)        
+set encoding=utf-8
+set langmenu=zh_CN.UTF-8
+"" 设置打开文件的编码格式  
+set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1 
+set fileencoding=utf-8
+"解决菜单乱码
+source $VIMRUNTIME/delmenu.vim
+source $VIMRUNTIME/menu.vim
+
+    
+"设置中文帮助
+set helplang=cn
+"设置为双字宽显示，否则无法完整显示如:☆
+set ambiwidth=double
+" 
+ let laststatus = 2
+ let g:airline_powerline_fonts = 1   " 使用powerline打过补丁的字体
+" " 开启tabline
+ let g:airline#extensions#tabline#enabled = 1
+" "tabline中当前buffer两端的分隔字符
+ let g:airline#extensions#tabline#left_sep = ' '
+" "tabline中未激活buffer两端的分隔字符
+ let g:airline#extensions#tabline#left_alt_sep = '|'
+" "tabline中buffer显示编号
+ let g:airline#extensions#tabline#buffer_nr_show = 1      
+" " 映射切换buffer的键位
+ nnoremap [b :bp<CR>
+ nnoremap ]b :bn<CR>
+"  
+"  set guifont=DejaVu_Sans_Mono_for_Powerline:h12:cANSI   
+"  "字体DejaVu Sans Mono for Powerline，需放在配置文件最后面
+
+
+" nerd - commenter
+" Add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1
+
+
+" Use compact syntax for prettified multi-line comments
+let g:NERDCompactSexyComs = 1
+
+
+" Align line-wise comment delimiters flush left instead of following code indentation
+let g:NERDDefaultAlign = 'left'
+
+
+" Set a language to use its alternate delimiters by default
+let g:NERDAltDelims_java = 1
+
+
+" Add your own custom formats or override the defaults
+let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/'} }
+
+"Allow commenting and inverting empty lines (useful when commenting a region)
+let g:NERDCommentEmptyLines = 1
+
+
+" Enable trimming of trailing whitespace when uncommenting"
+let g:NERDTrimTrailingWhitespace = 1
+
+
+" Enable NERDCommenterToggle to check all selected lines is commented or not"
+let g:NERDToggleCheckAllLines = 1
+
+" vim-rainbow{}
+let g:rainbow_active = 1
+
+" vim-color- solarized
+if has("gui_runing")              "如果在图形用户界面
+    set background=light          "设置背景色为亮色
+else                              "设置背景色为深色
+    set background=dark           "就开启256色支持，默认为8色  
+    set t_Co=256
+endif
+let g:solarized_bold=0
+let g:solarized_underline=1
+
+" vim-autopairs
+au Filetype FILETYPE let b:AutoPairs = {"(": ")"}
+au FileType php      let b:AutoPairs = AutoPairsDefine({'<?' : '?>', '<?php': '?>'})
+
+"YCM
+
+let g:ycm_server_python_interpreter='/usr/bin/python3.8'
+let g:ycm_global_ycm_extra_conf='~/.vim/.ycm_extra_conf.py' 
